@@ -15,7 +15,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddDbContext<AppDbContext>(x =>
 {
-    x.UseSqlServer("Data Source=127.0.0.1; Initial Catalog=EasyHR; User Id=sa; Password=Abc123456.", options =>
+    x.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"), options =>
     {
         options.MigrationsAssembly(Assembly.GetAssembly(typeof(AppDbContext)).GetName().Name);
     }).UseQueryTrackingBehavior(QueryTrackingBehavior.NoTrackingWithIdentityResolution);
